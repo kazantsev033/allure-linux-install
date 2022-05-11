@@ -1,1 +1,1 @@
-# qameta-allure-ubuntu-install
+# Usage
