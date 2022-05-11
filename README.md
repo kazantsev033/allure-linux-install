@@ -11,7 +11,7 @@ sudo ./install-allure.sh
 Options:
   -v
     Specify allure version  
-    Default: 2.17.3
+    Default: latest
   -h
     Print help
 </pre>

@@ -1,11 +1,14 @@
 #!/bin/bash
-allureVersion=2.17.3
+
+ALLURE_REPO=https://api.github.com/repos/allure-framework/allure2
+allureVersion=`curl -s $ALLURE_REPO/releases/latest | grep tag_name | cut -d '"' -f 4`
+
 help()
 {
     echo "Options:"
     echo "  -v"
-    echo "    Specify allure version"
-    echo "    Default: 2.17.3"
+    echo "    Specify Allure version"
+    echo "    Default: latest"
     echo "  -h"
     echo "    Print help"
 }
@@ -16,15 +19,26 @@ while getopts ":hv" option; do
             help
             exit;;
         v)
-            allureVersion=$2
-            echo $allureVersion
+            if [ -z "$2" ]
+            then
+                echo "Allure version is not specified"
+                exit
+            else
+                allureVersion=$2
+            fi            
    esac
 done
 
-url=https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/$allureVersion/allure-commandline-$allureVersion.tgz
+url=`curl -s $ALLURE_REPO/releases/tags/$allureVersion | grep browser_download_url | grep tgz | cut -d '"' -f 4`
+
+if [ -z "$url" ]
+then
+    echo "Unbale to find Allure with version $allureVersion"
+    exit
+fi
 
 if curl --output /dev/null --silent --head --fail "$url"; then
-    curl -s $url | tar -xvz -C /opt
+    wget -c $url -O - | tar -xvz --overwrite -C /opt
     ln -sf /opt/allure-$allureVersion/bin/allure /usr/bin/allure
     echo "Allure `allure --version` has been installed"
 else
