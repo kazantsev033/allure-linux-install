@@ -12,7 +12,7 @@ Output:
 </pre>
 ### Usage
 <pre>
-wget https://github.com/kazantsev033/allure-linux-install/blob/master/install-allure.sh && chmod +x install-allure.sh
+wget https://raw.githubusercontent.com/kazantsev033/allure-linux-install/master/install-allure.sh && chmod +x install-allure.sh
 sudo ./install-allure.sh
 </pre>
 
