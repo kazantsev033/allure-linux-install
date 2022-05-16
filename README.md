@@ -1,4 +1,4 @@
-A script to install [Allure](https://github.com/allure-framework/allure2) on Linux in /opt
+A script to install [Allure](https://github.com/allure-framework/allure2) on Linux
 
 ### Preconditions
 Make sure you have Java intalled
